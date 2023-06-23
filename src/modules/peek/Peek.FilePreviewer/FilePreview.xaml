@@ -54,10 +54,7 @@
         <controls:ArchiveControl
             x:Name="ArchivePreview"
             LoadingState="{x:Bind ArchivePreviewer.State, Mode=OneWay}"
-            Source="{x:Bind ArchivePreviewer.Tree, Mode=OneWay}"
-            FileCount="{x:Bind ArchivePreviewer.FileCountText, Mode=OneWay}"
-            DirectoryCount="{x:Bind ArchivePreviewer.DirectoryCountText, Mode=OneWay}"
-            Size="{x:Bind ArchivePreviewer.SizeText, Mode=OneWay}"
+            Source="{x:Bind ArchivePreviewer.SourcePath, Mode=OneWay}"
             Visibility="{x:Bind IsPreviewVisible(ArchivePreviewer, Previewer.State), Mode=OneWay}" />
         
         <controls:UnsupportedFilePreview

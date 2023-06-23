@@ -80,7 +80,6 @@
             HorizontalScrollBarVisibility="Auto">
             <TreeView
                 x:Name="ArchivePreview"
-                ItemsSource="{x:Bind Source, Mode=OneWay}"
                 ItemTemplateSelector="{StaticResource ArchiveItemTemplateSelector}"
                 SelectionMode="None"
                 CanReorderItems="False"
@@ -107,7 +106,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     Grid.Column="0"
-                    Text="{x:Bind DirectoryCount, Mode=OneWay}"
+                    x:Name="DirectoryCount"
                     IsTextSelectionEnabled="True"
                     VerticalAlignment="Center"
                     TextWrapping="Wrap" />
@@ -117,7 +116,7 @@
                     BorderThickness="0 0 1 0" />
                 <TextBlock
                     Grid.Column="2"
-                    Text="{x:Bind FileCount, Mode=OneWay}"
+                    x:Name="FileCount"
                     IsTextSelectionEnabled="True"
                     VerticalAlignment="Center"
                     TextWrapping="Wrap" />
@@ -127,7 +126,7 @@
                     BorderThickness="0 0 1 0" />
                 <TextBlock
                     Grid.Column="4"
-                    Text="{x:Bind Size, Mode=OneWay}"
+                    x:Name="Size"
                     IsTextSelectionEnabled="True"
                     VerticalAlignment="Center"
                     TextWrapping="Wrap" />

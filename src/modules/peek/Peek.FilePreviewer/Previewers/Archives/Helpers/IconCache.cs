@@ -22,7 +22,7 @@ namespace Peek.FilePreviewer.Previewers.Archives.Helpers
 
         private BitmapSource? _directoryIconCache;
 
-        public async Task<BitmapSource?> GetFileExtIconAsync(string fileName, CancellationToken cancellationToken)
+        public async Task<BitmapSource?> GetFileExtIconAsync(string fileName)
         {
             var extension = Path.GetExtension(fileName);
 
@@ -36,7 +36,7 @@ namespace Peek.FilePreviewer.Previewers.Archives.Helpers
                 var shFileInfo = default(SHFILEINFO);
                 if (NativeMethods.SHGetFileInfo(fileName, NativeMethods.FILE_ATTRIBUTE_NORMAL, ref shFileInfo, (uint)Marshal.SizeOf(shFileInfo), NativeMethods.SHGFI_ICON | NativeMethods.SHGFI_SMALLICON | NativeMethods.SHGFI_USEFILEATTRIBUTES) != IntPtr.Zero)
                 {
-                    var imageSource = await BitmapHelper.GetBitmapFromHIconAsync(shFileInfo.HIcon, cancellationToken);
+                    var imageSource = await BitmapHelper.GetBitmapFromHIconAsync(shFileInfo.HIcon, CancellationToken.None);
                     _cache.Add(extension, imageSource);
                     return imageSource;
                 }
@@ -53,7 +53,7 @@ namespace Peek.FilePreviewer.Previewers.Archives.Helpers
             return null;
         }
 
-        public async Task<BitmapSource?> GetDirectoryIconAsync(CancellationToken cancellationToken)
+        public async Task<BitmapSource?> GetDirectoryIconAsync()
         {
             if (_directoryIconCache != null)
             {
@@ -65,7 +65,7 @@ namespace Peek.FilePreviewer.Previewers.Archives.Helpers
                 var shinfo = default(SHFILEINFO);
                 if (NativeMethods.SHGetFileInfo("directory", NativeMethods.FILE_ATTRIBUTE_DIRECTORY, ref shinfo, (uint)Marshal.SizeOf(shinfo), NativeMethods.SHGFI_ICON | NativeMethods.SHGFI_SMALLICON | NativeMethods.SHGFI_USEFILEATTRIBUTES) != IntPtr.Zero)
                 {
-                    var imageSource = await BitmapHelper.GetBitmapFromHIconAsync(shinfo.HIcon, cancellationToken);
+                    var imageSource = await BitmapHelper.GetBitmapFromHIconAsync(shinfo.HIcon, CancellationToken.None);
                     _directoryIconCache = imageSource;
                     return imageSource;
                 }
